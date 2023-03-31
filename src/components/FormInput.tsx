@@ -12,7 +12,6 @@ export const FormInput = ({ placeholder, ...otherProps }: FormInputProps) => {
       borderRadius={5}
       fontSize="lg"
       padding={5}
-      focusBorderColor="orange.500"
       mb={5}
       color="white"
       placeholder={placeholder}
