@@ -5,7 +5,6 @@ import {
   Stack,
   Text,
   useRadioGroup,
-  useToast,
   VStack,
   Wrap,
   WrapItem,
@@ -33,8 +32,6 @@ const options = [
 ];
 
 export default function Question() {
-  const toast = useToast();
-
   const handleChange = (value: any) => {
     console.log(value);
   };
