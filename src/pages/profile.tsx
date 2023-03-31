@@ -5,7 +5,6 @@ import {
   Flex,
   FormErrorMessage,
   Text,
-  useToast,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
@@ -40,7 +39,6 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const toast = useToast();
   const router = useRouter();
 
   const methods = useForm<FormValues>({
