@@ -16,26 +16,21 @@ export default function Question() {
       >
         <Box width="50%">
           <Text as="h1" fontSize="4xl">
-            Resultado da Avaliações e Habilidades
+            Resultado da avaliações e habilidades
           </Text>
 
           <Text as="h2" fontSize="1xl" mb="10">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            Utilize o feedback para aperfeiçoar seu conhecimento.
           </Text>
 
           <Text fontSize="1xl" mb="10">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry. Lorem Ipsum is simply dummy text of the
-            printing and typesetting industry.
+          Os resultados da avaliação de habilidades podem ser utilizados para identificar áreas que precisam ser aprimoradas e para desenvolver um plano
+          de treinamento personalizado. Além disso, os resultados podem ser usados para tomar decisões sobre promoções e aumentos salariais, bem como para 
+          identificar funcionários com alto potencial de liderança.
           </Text>
 
           <Text fontSize="1xl" mb="10">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry. Lorem Ipsum is simply dummy text of the
-            printing and typesetting industry.
+            Faça uma avaliação a cada três meses, para nivelar seu nível de conhecimento.
           </Text>
 
           <Button
