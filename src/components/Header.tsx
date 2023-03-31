@@ -1,7 +1,11 @@
-import { Avatar, Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 export function Header() {
+  const { data: session } = useSession();
+
   return (
     <Flex
       w="100%"
@@ -21,17 +25,19 @@ export function Header() {
 
       <Flex align="center" ml="auto">
         <Box mr="4" textAlign="right">
-          <Text color="white">Felipe Rosas</Text>
-          <Text onClick={() => {}} as="a" color="white" fontSize="small">
-            Sair
-          </Text>
+          <Text color="white">{session?.user?.name}</Text>
+          <Button onClick={() => signOut()}>
+            <Text color="white" fontSize="small">
+              Sair
+            </Text>
+          </Button>
         </Box>
 
         <Avatar
           w="50px"
           h="50px"
-          name="Felipe Rosas"
-          src="https://github.com/eufelipe.png"
+          name={session?.user?.name || ""}
+          src={session?.user?.image || ""}
         />
       </Flex>
     </Flex>

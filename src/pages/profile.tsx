@@ -7,12 +7,15 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
+import { useSession } from "next-auth/react";
 import { FormInput, FormSelect } from "../components";
 
 import languageOptions from "../data/languages";
 import levelOptions from "../data/levels";
 
 export default function Profile() {
+  const { data: session } = useSession();
+
   return (
     <Box maxWidth={990} margin="0 auto">
       <Box
@@ -27,8 +30,8 @@ export default function Profile() {
               <Avatar
                 w="150px"
                 h="150px"
-                name="Felipe Rosas"
-                src="https://github.com/eufelipe.png"
+                name={session?.user?.name || ""}
+                src={session?.user?.image || ""}
               />
             </WrapItem>
           </Wrap>
@@ -38,7 +41,7 @@ export default function Profile() {
             Mais sobre você
           </Text>
           <Text as="h2" fontSize="2xl" mb="10">
-            Felipe da Silva Rosas (contato@eufelipe.com)
+            {session?.user?.name} ({session?.user?.email})
           </Text>
 
           <Flex flexDir="column">
