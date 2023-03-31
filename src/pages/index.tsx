@@ -23,10 +23,8 @@ export default function Home() {
         <Image src="/logo-white.svg" alt="logo" width={400} height={200} />
 
         <Text as="h2" fontSize="2xl">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industrys standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+        Não importa onde você esteja em sua carreira como desenvolvedor, sempre há espaço para crescimento e aprimoramento
+        Teste e aprimore suas habilidades, para se tornar um Dev de sucesso.
         </Text>
 
         <Wrap spacing={4}>
