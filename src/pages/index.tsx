@@ -23,7 +23,7 @@ export default function Home() {
         <Image src="/logo-white.svg" alt="logo" width={400} height={200} />
 
         <Text as="h2" fontSize="2xl">
-        Não importa onde você esteja em sua carreira como desenvolvedor, sempre há espaço para crescimento e aprimoramento
+        Não importa onde você esteja em sua carreira como desenvolvedor(a), sempre há espaço para crescimento e aprimoramento.
         Teste e aprimore suas habilidades, para se tornar um Dev de sucesso.
         </Text>
 

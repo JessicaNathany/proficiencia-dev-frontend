@@ -21,8 +21,7 @@ export default function Dashboard() {
           Comece aqui
         </Text>
         <Text as="h2" fontSize="1xl" mb="10">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
+          Incie escolhendo uma das opções abaixo que deseja.
         </Text>
 
         <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -34,9 +33,7 @@ export default function Dashboard() {
                   Avaliações e Habilidades
                 </Text>
                 <Text color="gray.500">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s
+                  Faça um simulado para validar seus conhecimentos em sua stack atual. É uma forma de medir nosso conhecimento e melhorar com os feedbacks recebido.
                 </Text>
               </Stack>
             </CardBody>
@@ -67,9 +64,7 @@ export default function Dashboard() {
                   Simulados para processos seletivos
                 </Text>
                 <Text color="gray.500">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s
+                  Faça simulados de processo seletivos e prepara-se para conseguir a vaga que almeja.
                 </Text>
               </Stack>
             </CardBody>
@@ -98,9 +93,7 @@ export default function Dashboard() {
                   Roadmap para seu perfil
                 </Text>
                 <Text color="gray.500">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s
+                  Não sabe o que estudar ou caminho a seguir? Monte um roadmap de estudos e aprofunde-se ainda mais na sua stack.
                 </Text>
               </Stack>
             </CardBody>
