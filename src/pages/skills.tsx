@@ -94,9 +94,9 @@ export default function Skills() {
                 </Flex>
 
                 {!!error && (
-                  <FormErrorMessage>
+                  <Text color="red">
                     Ocorreu um erro ao salvar as informações
-                  </FormErrorMessage>
+                  </Text>
                 )}
 
                 <Wrap spacing={4}>

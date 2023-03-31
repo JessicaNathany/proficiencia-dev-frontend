@@ -18,9 +18,9 @@ export const FormRadio = (props: any) => {
       >
         <HStack>
           {state.isChecked ? (
-            <Image src="/radio_on.png" rounded="full" {...getLabelProps()} />
+            <Image  alt="ativo" src="/radio_on.png" rounded="full" {...getLabelProps()} />
           ) : (
-            <Image src="/radio_off.png" rounded="full" {...getLabelProps()} />
+            <Image alt="inativo" src="/radio_off.png" rounded="full" {...getLabelProps()} />
           )}
 
           <Text

@@ -48,7 +48,7 @@ export default function Question() {
           </Button>
         </Box>
         <Box width="40%">
-          <Image src="/sitting.png" />
+          <Image alt="feedback" src="/sitting.png" />
         </Box>
       </Box>
     </Box>

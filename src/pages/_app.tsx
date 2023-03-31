@@ -55,7 +55,7 @@ function Auth({ children }: any) {
     if (!isUser) {
       router.push("/login");
     }
-  }, [isUser, loading]);
+  }, [router, isUser, loading]);
 
   if (isUser) {
     return children;

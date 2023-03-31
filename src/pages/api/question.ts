@@ -5,8 +5,8 @@ import languageOptions from "../../data/languages";
 import levelOptions from "../../data/levels";
 import programmingLanguageOptions from "../../data/programming_languages";
 import skillOptions from "../../data/skills";
+import resultFormat from "../../data/result_format";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   if (request.method !== "POST") {
     return response.status(405).json({ message: "Method Not Allow" });
@@ -22,6 +22,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     skillLevel,
   } = request.body;
 
+  // validar a entrada dos objetos
   const userSkillObj = skillOptions.find((item) => item.value === userSkill);
   const userLevelObj = levelOptions.find((item) => item.value === userLevel);
   const userLanguageObj = languageOptions.find(
@@ -46,27 +47,14 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     skillLevel: skillLevelObj,
   };
 
-  const resultFormat = JSON.stringify([
-    {
-      id: 1,
-      question: "Qual a diferença entre uma função e um método?",
-      answers: [
-        {
-          id: 1,
-          answer:
-            "Uma função é um bloco de código que pode ser executado várias vezes, enquanto um método é um bloco de código que pode ser executado várias vezes, mas pertence a um objeto.",
-          correct: false,
-        },
-      ],
-    },
-  ]);
+  const resultPatten = JSON.stringify(resultFormat);
 
   const prompt = `
   Baseado em um usuário ${userSkillObj?.label} de nível ${userLevelObj?.label} 
   e que fala Inglês ${userLanguageObj?.label}, 
   sugira um questionário de múltipla escolha para ajudar a se preparar para uma prova de ${skillLanguageObj?.label},
   retorne um questionário de múltipla escolha com 5 perguntas e 4 respostas cada, 
-  retorne tudo em json sem formatação no padrão : ${resultFormat}  `.trim();
+  retorne tudo em json sem formatação e no padrão : ${resultPatten}  `.replaceAll("\n", "");
 
   try {
     const result = await OpenAIService.completion(prompt);
