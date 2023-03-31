@@ -7,7 +7,10 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { FormInput } from "../components";
+import { FormInput, FormSelect } from "../components";
+
+import languageOptions from "../data/languages";
+import levelOptions from "../data/levels";
 
 export default function Profile() {
   return (
@@ -40,8 +43,14 @@ export default function Profile() {
 
           <Flex flexDir="column">
             <FormInput placeholder="Qual é sua função? (ex. Backend Java, Frontend React, etc)" />
-            <FormInput placeholder="Qual é seu nível  (Estagiário, junior, Pleno, Senior, etc)" />
-            <FormInput placeholder="Qual seu nível de inglês (nao falo, iniciante, fluente, etc)" />
+            <FormSelect
+              placeholder="Qual é seu nível  (Estagiário, junior, Pleno, Senior, etc)"
+              options={levelOptions}
+            />
+            <FormSelect
+              placeholder="Qual seu nível de inglês (nao falo, iniciante, fluente, etc)"
+              options={languageOptions}
+            />
           </Flex>
 
           <Wrap spacing={4}>

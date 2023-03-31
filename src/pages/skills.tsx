@@ -2,32 +2,9 @@ import { Box, Button, Flex, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import { FormSelect } from "../components";
 import { Header } from "../components/Header";
 
-const levelOptions = [
-  { value: 1, label: "Estagiário" },
-  { value: 2, label: "Junior" },
-  { value: 3, label: "Pleno" },
-  { value: 4, label: "Senior" },
-];
-
-const skillOptions = [
-  { value: 1, label: "Backend" },
-  { value: 2, label: "Frontend" },
-  { value: 3, label: "Fullstack" },
-  { value: 4, label: "Mobile" },
-  { value: 5, label: "Data Science" },
-];
-
-const languageOptions = [
-  { value: 1, label: "Nodejs", skillOptionsIds: [1,2] },
-  { value: 2, label: "C#" , skillOptionsIds: [1] },
-  { value: 3, label: "Java", skillOptionsIds: [1]  },
-  { value: 4, label: "React", skillOptionsIds: [2]  },
-  { value: 4, label: "Swift", skillOptionsIds: [4]  },
-  { value: 4, label: "VueJs", skillOptionsIds: [2]  },
-  { value: 4, label: "Golang", skillOptionsIds: [1]  },
-  { value: 4, label: "Python", skillOptionsIds: [1,2,5]  },
-  { value: 4, label: "R", skillOptionsIds: [5]  },
-];
+import levelOptions from "../data/levels";
+import languageOptions from "../data/programming_languages";
+import skillOptions from "../data/skills";
 
 export default function Skills() {
   return (

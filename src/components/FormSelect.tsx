@@ -73,7 +73,7 @@ export const FormSelect = ({
 
         placeholder: (provided) => ({
           ...provided,
-          color: "white",
+          color: "#718096",
         }),
 
         valueContainer: (provided) => ({
