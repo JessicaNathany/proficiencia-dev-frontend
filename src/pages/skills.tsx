@@ -70,8 +70,7 @@ export default function Skills() {
               Avaliações e Habilidades
             </Text>
             <Text as="h2" fontSize="1xl" mb="10">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
+              Maximizando seu potencial: A importância das avaliações e habilidades no mercado atual.
             </Text>
             <Form onSubmit={onSubmit}>
               <Box>
