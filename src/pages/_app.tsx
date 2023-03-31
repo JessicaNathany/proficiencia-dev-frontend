@@ -62,7 +62,7 @@ function Auth({ children }: any) {
   }
   return (
     <Flex w="100vw" h="100vh" align="center" justify="center">
-      <Spinner />
+      <Spinner size="lg" width={100} height={100} />
     </Flex>
   );
 }

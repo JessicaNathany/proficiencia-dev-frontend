@@ -6,21 +6,32 @@ export const FormRadio = (props: any) => {
     useRadio(radioProps);
 
   return (
-    <chakra.label {...htmlProps} cursor="pointer">
+    <chakra.label {...htmlProps} cursor="pointer" alignSelf="flex-start">
       <input {...getInputProps({})} hidden />
       <Box
         {...getCheckboxProps()}
         bg="transparent"
-        w={12}
         p={1}
-        mb="5"
+        mb="1"
         rounded="full"
+        w="100%"
+        flex={1}
       >
         <HStack>
           {state.isChecked ? (
-            <Image  alt="ativo" src="/radio_on.png" rounded="full" {...getLabelProps()} />
+            <Image
+              alt="ativo"
+              src="/radio_on.png"
+              rounded="full"
+              {...getLabelProps()}
+            />
           ) : (
-            <Image alt="inativo" src="/radio_off.png" rounded="full" {...getLabelProps()} />
+            <Image
+              alt="inativo"
+              src="/radio_off.png"
+              rounded="full"
+              {...getLabelProps()}
+            />
           )}
 
           <Text
