@@ -41,6 +41,8 @@ export default function Skills() {
           <Wrap spacing={4}>
             <WrapItem>
               <Button
+                as="a"
+                href="/question"
                 bg="brand.500"
                 p={3}
                 px={10}

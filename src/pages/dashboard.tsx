@@ -43,6 +43,8 @@ export default function Dashboard() {
             <CardFooter>
               <ButtonGroup spacing="2">
                 <Button
+                  as="a"
+                  href="/skills"
                   variant="solid"
                   bg="brand.500"
                   p={3}
@@ -52,7 +54,7 @@ export default function Dashboard() {
                   borderRadius={5}
                   mt="5"
                 >
-                  Buy now
+                  Começar
                 </Button>
               </ButtonGroup>
             </CardFooter>

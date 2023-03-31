@@ -39,6 +39,8 @@ export default function Question() {
           </Text>
 
           <Button
+            as="a"
+            href="/dashboard"
             bg="brand.500"
             p={3}
             px={10}

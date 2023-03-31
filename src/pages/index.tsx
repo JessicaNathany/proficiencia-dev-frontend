@@ -32,6 +32,8 @@ export default function Home() {
         <Wrap spacing={4}>
           <WrapItem>
             <Button
+              as="a"
+              href="/profile"
               bg="brand.500"
               p={5}
               textColor="white"

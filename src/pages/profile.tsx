@@ -47,6 +47,8 @@ export default function Profile() {
           <Wrap spacing={4}>
             <WrapItem>
               <Button
+                as="a"
+                href="/dashboard"
                 bg="brand.500"
                 p={5}
                 px={20}

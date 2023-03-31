@@ -79,6 +79,8 @@ export default function Question() {
           <Wrap spacing={4}>
             <WrapItem>
               <Button
+                as="a"
+                href="/overview"
                 bg="brand.500"
                 p={3}
                 px={10}
