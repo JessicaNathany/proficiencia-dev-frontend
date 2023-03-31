@@ -65,6 +65,7 @@ export default function Dashboard() {
                 </Text>
                 <Text color="gray.500">
                   Faça simulados de processo seletivos e prepara-se para conseguir a vaga que almeja.
+                  Através do simulado você pode se preparar para vagas futuras.
                 </Text>
               </Stack>
             </CardBody>
