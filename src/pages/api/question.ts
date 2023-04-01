@@ -1,11 +1,13 @@
 import { OpenAIService } from "@/src/services";
 import { NextApiRequest, NextApiResponse } from "next";
 
+import jsonlint from "jsonlint";
+
 import languageOptions from "../../data/languages";
 import levelOptions from "../../data/levels";
 import programmingLanguageOptions from "../../data/programming_languages";
-import skillOptions from "../../data/skills";
 import resultFormat from "../../data/result_format";
+import skillOptions from "../../data/skills";
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   if (request.method !== "POST") {
@@ -22,7 +24,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     skillLevel,
   } = request.body;
 
-  // validar a entrada dos objetos
   const userSkillObj = skillOptions.find((item) => item.value === userSkill);
   const userLevelObj = levelOptions.find((item) => item.value === userLevel);
   const userLanguageObj = languageOptions.find(
@@ -50,11 +51,14 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   const resultPatten = JSON.stringify(resultFormat);
 
   const prompt = `
-  Baseado em um usuário ${userSkillObj?.label} de nível ${userLevelObj?.label} 
+  Baseado em um desenvolvedor de nível ${userLevelObj?.label} 
   e que fala Inglês ${userLanguageObj?.label}, 
   sugira um questionário de múltipla escolha para ajudar a se preparar para uma prova de ${skillLanguageObj?.label},
   retorne um questionário de múltipla escolha com 5 perguntas e 4 respostas cada, 
-  retorne tudo em json sem formatação e no padrão : ${resultPatten}  `.replaceAll("\n", "");
+  retorne tudo em json sem formatação e no padrão : ${resultPatten}  `.replaceAll(
+    "\n",
+    ""
+  );
 
   try {
     const result = await OpenAIService.completion(prompt);
@@ -83,7 +87,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         ""
       );
 
-      const message = JSON.parse(messageWithoutFirstCharacter);
+      const message = jsonlint.parse(messageWithoutFirstCharacter);
 
       return response.status(200).json({
         ...data,
@@ -93,11 +97,11 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       });
     } catch (error) {
       console.log(error);
-    }
 
-    return response
-      .status(200)
-      .json({ ...data, prompt, parsed: false, message: cleanResponse });
+      return response
+        .status(400)
+        .json({ prompt, parsed: false, message: cleanResponse });
+    }
   } catch (error) {
     console.log(error);
     return response.status(400).json({ error: "Error on OpenAI" });
