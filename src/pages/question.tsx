@@ -5,7 +5,7 @@ import {
   Button,
   Flex,
   HStack,
-  Spinner,
+  Image,
   Text,
   useRadioGroup,
   VStack,
@@ -175,11 +175,11 @@ export default function Question() {
 
   if (!!isLoading || !currentQuestion) {
     return (
-      <Flex w="100vw" h="100vh" align="center" justify="center">
+      <Flex w="100vw" h="100vh" align="center" justify="center" bg="#124b60">
         <VStack>
-          <Spinner size="lg" width={100} height={100} />
+          <Image w={480} h={480} src="/loading.gif" alt="loading" />
           <Text as="h1" fontSize="4xl">
-            Criando sua avaliação
+            Criando seu desafio, aguarde...
           </Text>
         </VStack>
       </Flex>
