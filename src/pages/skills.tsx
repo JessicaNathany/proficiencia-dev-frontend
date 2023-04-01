@@ -1,16 +1,17 @@
+import { useState } from "react";
+
 import { Box, Button, Flex, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
+import { FormProvider, useForm } from "react-hook-form";
+import * as yup from "yup";
+
 import { Form, FormSelect } from "../components";
 import { Header } from "../components/Header";
 
 import levelOptions from "../data/levels";
 import languageOptions from "../data/programming_languages";
 import skillOptions from "../data/skills";
-
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import * as yup from "yup";
 import { QuestionService } from "../services";
 
 interface FormValues {
@@ -43,8 +44,8 @@ export default function Skills() {
 
       const question = {
         skill,
-        level: Number(level),
-        language: Number(language),
+        skillLevel: Number(level),
+        skillLanguage: Number(language),
       };
 
       await QuestionService.saveQuestion(question);
@@ -70,7 +71,8 @@ export default function Skills() {
               Avaliações e Habilidades
             </Text>
             <Text as="h2" fontSize="1xl" mb="10">
-              Maximizando seu potencial: A importância das avaliações e habilidades no mercado atual.
+              Maximizando seu potencial: A importância das avaliações e
+              habilidades no mercado atual.
             </Text>
             <Form onSubmit={onSubmit}>
               <Box>

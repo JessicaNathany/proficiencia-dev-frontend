@@ -1,49 +1,62 @@
+import { useCallback, useEffect, useState } from "react";
+
 import {
   Box,
   Button,
   Flex,
+  HStack,
   Spinner,
-  Stack,
   Text,
   useRadioGroup,
   VStack,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+
 import { FormRadio } from "../components";
 import { Header } from "../components/Header";
 import { QuestionService, UserService } from "../services";
 import { IQuestion } from "../services/question-service";
-import { sleep } from "../utils/sleep";
 
 export default function Question() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [questions, setQuestions] = useState<IQuestion[]>([]);
-
   const [profile, setProfile] = useState<any>(null);
   const [question, setQuestion] = useState<any>(null);
+  const [userAnswer, setUserAnswer] = useState<any>(null);
 
   const router = useRouter();
 
+  const handleConfirmAnswer = useCallback(async () => {
+    const currentAnswer = userAnswer;
+
+    setQuestions((prev) =>
+      prev.map((item) => {
+        if (item.id === currentQuestion?.id) {
+          return {
+            ...item,
+            userAnswer: currentAnswer,
+          };
+        }
+        return item;
+      })
+    );
+
+    setUserAnswer(null);
+
+    const endQuestion = questions.filter((item) => item.userAnswer === null);
+    if (!endQuestion.length) {
+      handleFinishQuestions();
+    }
+  }, [userAnswer]);
+
   const handleChange = async (value: any) => {
-    const newQuestions = questions.map((item) => {
-      if (item.id === currentQuestion?.id) {
-        return {
-          ...item,
-          userAnswer: value,
-        };
-      }
-
-      return item;
-    });
-
-    await sleep(400);
-
-    setQuestions(newQuestions);
+    setUserAnswer(value);
   };
 
-  const { value, getRadioProps, getRootProps } = useRadioGroup({
+  const { getRadioProps, getRootProps } = useRadioGroup({
     onChange: handleChange,
   });
 
@@ -53,20 +66,12 @@ export default function Question() {
       router.push("/overview");
     } catch (exception) {
       setError(true);
-      console.log(
-        "Ocorreu um erro ao carregar as informações do usuário.",
-        exception
-      );
     }
   }, [questions]);
 
   const loadProfile = useCallback(async () => {
     try {
       const response = await UserService.loadProfile();
-      if (!response) {
-        router.push("/profile");
-        return;
-      }
       setProfile(response);
     } catch (exception) {
       router.push("/profile");
@@ -77,7 +82,7 @@ export default function Question() {
     try {
       const response = await QuestionService.loadQuestion();
       if (!response) {
-        router.push("/question");
+        router.push("/skills");
         return;
       }
 
@@ -85,7 +90,7 @@ export default function Question() {
     } catch (exception) {
       router.push("/question");
     }
-  }, []);
+  }, [profile]);
 
   const loadUserInfo = useCallback(async () => {
     try {
@@ -94,14 +99,11 @@ export default function Question() {
       }
 
       const response = await QuestionService.getQuestions(profile, question);
+      await QuestionService.clearFinishQuestions();
 
       setQuestions(response);
     } catch (exception) {
       setError(true);
-      console.log(
-        "Ocorreu um erro ao carregar as informações do usuário.",
-        exception
-      );
     } finally {
       setIsLoading(false);
     }
@@ -112,8 +114,11 @@ export default function Question() {
   }, [loadProfile]);
 
   useEffect(() => {
+    if (!profile) {
+      return;
+    }
     loadQuestion();
-  }, [loadQuestion]);
+  }, [profile, loadQuestion]);
 
   useEffect(() => {
     if (!!profile && !!question) {
@@ -129,25 +134,46 @@ export default function Question() {
             Ocorreu um erro ao criar sua avaliação
           </Text>
 
-          <Button
-            as="a"
-            href="/dashboard"
-            bg="brand.500"
-            p={3}
-            px={10}
-            fontSize="2xl"
-            textColor="white"
-            borderRadius={5}
-            mt="5"
-          >
-            Voltar ao ínicio
-          </Button>
+          <HStack alignItems="flex-start" justify="flex-start">
+            <Button
+              as="a"
+              href="/dashboard"
+              bg="brand.500"
+              p={3}
+              px={10}
+              fontSize="2xl"
+              textColor="white"
+              borderRadius={5}
+            >
+              Voltar ao ínicio
+            </Button>
+            <Button
+              as="a"
+              href="/question"
+              bg="gray.700"
+              p={3}
+              px={10}
+              fontSize="2xl"
+              textColor="white"
+              borderRadius={5}
+            >
+              Tentar novamente
+            </Button>
+          </HStack>
         </VStack>
       </Flex>
     );
   }
 
-  if (!!isLoading) {
+  const currentQuestion = questions.filter(
+    (item) => item.userAnswer === null
+  )[0];
+
+  if (!!questions.length && !currentQuestion) {
+    handleFinishQuestions();
+  }
+
+  if (!!isLoading || !currentQuestion) {
     return (
       <Flex w="100vw" h="100vh" align="center" justify="center">
         <VStack>
@@ -159,14 +185,6 @@ export default function Question() {
       </Flex>
     );
   }
-
-  const endQuestion = questions.filter((item) => !!item.userAnswer);
-
-  if (!!endQuestion.length) {
-    handleFinishQuestions();
-  }
-
-  const currentQuestion = questions.filter((item) => !item.userAnswer)[0];
 
   return (
     <Box w="100%">
@@ -181,24 +199,44 @@ export default function Question() {
             {currentQuestion?.question}
           </Text>
 
-          <Flex>
-            <Stack {...getRootProps()}>
-              <VStack>
-                {currentQuestion?.answers?.map((option) => {
-                  return (
-                    <FormRadio
-                      key={option.id}
-                      label={option.answer}
-                      selected={value === option.id}
-                      {...getRadioProps({
-                        value: option.id,
-                      })}
-                    />
-                  );
-                })}
-              </VStack>
-            </Stack>
-          </Flex>
+          <VStack {...getRootProps()}>
+            <VStack align="flex-start" w="100%">
+              {currentQuestion?.answers?.map((option) => {
+                return (
+                  <FormRadio
+                    key={option.id}
+                    label={option.answer}
+                    selected={Number(userAnswer) === Number(option.id)}
+                    {...getRadioProps({
+                      value: Number(option.id),
+                    })}
+                  />
+                );
+              })}
+
+              <Wrap mt="30">
+                <WrapItem>
+                  <Button
+                    type="submit"
+                    bg={!!userAnswer ? "brand.500" : "gray.700"}
+                    p={5}
+                    px={20}
+                    fontSize="2xl"
+                    textColor="white"
+                    borderRadius={5}
+                    onClick={handleConfirmAnswer}
+                    mt="5"
+                    disabled={!userAnswer}
+                    _hover={{
+                      cursor: !!userAnswer ? "pointer" : "not-allowed",
+                    }}
+                  >
+                    Próximo
+                  </Button>
+                </WrapItem>
+              </Wrap>
+            </VStack>
+          </VStack>
         </Box>
       </Box>
     </Box>

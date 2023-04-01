@@ -10,9 +10,34 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
 import { Header } from "../components/Header";
+import { UserService } from "../services";
 
 export default function Dashboard() {
+  const router = useRouter();
+
+  const [profile, setProfile] = useState<any>(null);
+
+  const loadProfile = useCallback(async () => {
+    const response = await UserService.loadProfile();
+
+    setProfile(response);
+  }, []);
+
+  const handleStartQuestions = useCallback(async () => {
+    if (!!profile) {
+      router.push("/skills");
+      return;
+    }
+    router.push("/profile");
+  }, [profile]);
+
+  useEffect(() => {
+    loadProfile();
+  }, [loadProfile]);
+
   return (
     <Box w="100%">
       <Header />
@@ -33,15 +58,16 @@ export default function Dashboard() {
                   Avaliações e Habilidades
                 </Text>
                 <Text color="gray.500">
-                  Faça um simulado para validar seus conhecimentos em sua stack atual. É uma forma de medir nosso conhecimento e melhorar com os feedbacks recebido.
+                  Faça um simulado para validar seus conhecimentos em sua stack
+                  atual. É uma forma de medir nosso conhecimento e melhorar com
+                  os feedbacks recebido.
                 </Text>
               </Stack>
             </CardBody>
             <CardFooter>
               <ButtonGroup spacing="2">
                 <Button
-                  as="a"
-                  href="/skills"
+                  onClick={handleStartQuestions}
                   variant="solid"
                   bg="brand.500"
                   p={3}
@@ -64,8 +90,9 @@ export default function Dashboard() {
                   Simulados para processos seletivos
                 </Text>
                 <Text color="gray.500">
-                  Faça simulados de processo seletivos e prepara-se para conseguir a vaga que almeja.
-                  Através do simulado você pode se preparar para vagas futuras.
+                  Faça simulados de processo seletivos e prepara-se para
+                  conseguir a vaga que almeja. Através do simulado você pode se
+                  preparar para vagas futuras.
                 </Text>
               </Stack>
             </CardBody>
@@ -94,7 +121,8 @@ export default function Dashboard() {
                   Roadmap para seu perfil
                 </Text>
                 <Text color="gray.500">
-                  Não sabe o que estudar ou caminho a seguir? Monte um roadmap de estudos e aprofunde-se ainda mais na sua stack.
+                  Não sabe o que estudar ou caminho a seguir? Monte um roadmap
+                  de estudos e aprofunde-se ainda mais na sua stack.
                 </Text>
               </Stack>
             </CardBody>

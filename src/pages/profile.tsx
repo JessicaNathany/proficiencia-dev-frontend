@@ -52,9 +52,9 @@ export default function Profile() {
       const { skill, language, level } = values;
 
       const profile = {
-        skill,
-        level: Number(level),
-        language: Number(language),
+        userSkill: skill,
+        userLevel: Number(level),
+        userEnglishLevel: Number(language),
       };
 
       await UserService.saveProfile(profile);
