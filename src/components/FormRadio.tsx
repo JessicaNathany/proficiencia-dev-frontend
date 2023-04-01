@@ -1,7 +1,7 @@
 import { Box, chakra, HStack, Image, Text, useRadio } from "@chakra-ui/react";
 
 export const FormRadio = (props: any) => {
-  const { image, ...radioProps } = props;
+  const { image, selected, ...radioProps } = props;
   const { state, getInputProps, getCheckboxProps, htmlProps, getLabelProps } =
     useRadio(radioProps);
 
@@ -18,7 +18,7 @@ export const FormRadio = (props: any) => {
         flex={1}
       >
         <HStack>
-          {state.isChecked ? (
+          {selected ? (
             <Image
               alt="ativo"
               src="/radio_on.png"
@@ -35,8 +35,9 @@ export const FormRadio = (props: any) => {
           )}
 
           <Text
+            fontWeight={selected ? "bold" : "normal"}
             fontSize="2xl"
-            color={state.isChecked ? "#1F6640" : "white"}
+            color={selected ? "#1F6640" : "white"}
             mt={2}
           >
             {props.label}
