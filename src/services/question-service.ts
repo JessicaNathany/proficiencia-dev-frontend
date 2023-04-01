@@ -48,7 +48,7 @@ export const getQuestions = async (
 export const finishQuestions = async (questions: any) => {
   try {
     const value = JSON.stringify(questions);
-    StorageService.setItem(FINISH_QUESTION_KEY, value);
+    await StorageService.setItem(FINISH_QUESTION_KEY, value);
   } catch (error) {
     throw Error("Error saving question");
   }
@@ -74,10 +74,17 @@ export const saveQuestion = async (question: any) => {
   }
 };
 
+export const clearFinishQuestions = async () => {
+  try {
+    StorageService.removeItem(FINISH_QUESTION_KEY);
+  } catch (error) {
+    throw Error("Error clearing question");
+  }
+};
+
 export const clear = async () => {
   try {
     StorageService.removeItem(QUESTION_KEY);
-    StorageService.removeItem(FINISH_QUESTION_KEY);
   } catch (error) {
     throw Error("Error clearing question");
   }
@@ -86,6 +93,7 @@ export const clear = async () => {
 export default {
   getQuestions,
   finishQuestions,
+  clearFinishQuestions,
   loadFinishQuestions,
   loadQuestion,
   saveQuestion,
