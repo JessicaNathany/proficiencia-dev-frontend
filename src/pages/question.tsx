@@ -179,7 +179,9 @@ export default function Question() {
         <VStack>
           <Image w={480} h={480} src="/loading.gif" alt="loading" />
           <Text as="h1" fontSize="4xl">
-            Criando seu desafio, aguarde...
+            {!!isLoading
+              ? "Criando seu desafio, aguarde..."
+              : "Aguarde enquanto estamos processando as respostas..."}
           </Text>
         </VStack>
       </Flex>
