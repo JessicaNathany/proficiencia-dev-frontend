@@ -32,7 +32,15 @@ export default function Dashboard() {
       return;
     }
     router.push("/profile");
-  }, [profile]);
+  }, [profile, router]);
+
+
+  const handleStartSimulate = useCallback(async ()=> {
+    if(!!profile){
+      router.push("/interview");
+      return;
+    }
+  },[profile, router]);
 
   useEffect(() => {
     loadProfile();
@@ -99,8 +107,9 @@ export default function Dashboard() {
             <CardFooter>
               <ButtonGroup spacing="2">
                 <Button
+                  onClick={handleStartSimulate}
                   variant="solid"
-                  bg="brand.100"
+                  bg="brand.500"
                   p={3}
                   px={10}
                   fontSize="1xl"
