@@ -54,7 +54,7 @@ interface FormValues {
     
           await QuestionService.saveQuestion(question);
     
-          router.push("/question");
+          router.push("/simulate");
         } catch (exception: any) {
           setError(
             exception?.response?.data?.message ??

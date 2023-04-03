@@ -42,6 +42,13 @@ export default function Dashboard() {
     }
   },[profile, router]);
 
+  const handleStartRoadmap = useCallback(async ()=> {
+    if(!!profile){
+      router.push("/roadmap");
+      return;
+    }
+  },[profile, router]);
+
   useEffect(() => {
     loadProfile();
   }, [loadProfile]);
@@ -117,7 +124,7 @@ export default function Dashboard() {
                   borderRadius={5}
                   mt="5"
                 >
-                  Em breve
+                 Começar
                 </Button>
               </ButtonGroup>
             </CardFooter>
@@ -138,9 +145,9 @@ export default function Dashboard() {
             <CardFooter>
               <ButtonGroup spacing="2">
                 <Button
-                  disabled
+                  onClick={handleStartRoadmap}
                   variant="solid"
-                  bg="brand.100"
+                  bg="brand.500"
                   p={3}
                   px={10}
                   fontSize="1xl"
@@ -148,7 +155,7 @@ export default function Dashboard() {
                   borderRadius={5}
                   mt="5"
                 >
-                  Em breve
+                 Começar
                 </Button>
               </ButtonGroup>
             </CardFooter>
