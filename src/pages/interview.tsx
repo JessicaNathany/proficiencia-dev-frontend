@@ -81,17 +81,17 @@ return (
               <Box>
                 <Flex flexDir="column">
                   <FormSelect
-                    name="position"
+                    name="skillPosition"
                     placeholder="Selecione o cargo"
                     options={skillOptionsPosition}
                   />
                   <FormSelect
-                    name="skill"
+                    name="skillInterview"
                     placeholder="Selecione a habilidade"
                     options={skillJobInterviewOptions}
                   />
                   <FormSelect
-                    name="englishLevel"
+                    name="language"
                     placeholder="Selecione o nível do seu inglês"
                     options={languageLevel}
                   />
